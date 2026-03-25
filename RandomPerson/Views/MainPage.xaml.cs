@@ -1,5 +1,6 @@
 ﻿namespace RandomPerson;
 
+using RandomPerson.Models;
 using RandomPerson.Services;
 using RandomPerson.Views;
 
@@ -38,7 +39,7 @@ public partial class MainPage : ContentPage
     {
         var name = await DisplayPromptAsync("Nowa klasa", "Podaj nazwę klasy (np. 2A):");
         if (string.IsNullOrWhiteSpace(name)) return;
-        FileService.SaveClass(name.Trim(), new());
+        FileService.SaveClass(new Class { Name = name.Trim() });
         RefreshClasses();
     }
 

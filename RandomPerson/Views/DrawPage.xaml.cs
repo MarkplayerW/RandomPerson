@@ -5,24 +5,22 @@ namespace RandomPerson.Views;
 
 public partial class DrawPage : ContentPage
 {
-	private string _className;
-	private List<Student> _students;
+	private Class _classData;
 
 	public DrawPage(string className)
 	{
 		InitializeComponent();
-		_className = className;
-		Title = $"Losowanie - {className}";
-		_students = FileService.LoadClass(_className);
+		_classData = FileService.LoadClassData(className);
+		Title = $"Losowanie - {_classData.Name}";
 	}
 
 	private void OnDrawStudent(object sender, EventArgs e)
 	{
-		var drawn = DrawService.DrawStudent(_students);
+		var drawn = DrawService.DrawStudent(_classData.Students);
 		if (drawn != null)
 		{
 			DrawnStudentLabel.Text = drawn.Name;
-			FileService.SaveClass(_className, _students);
+			FileService.SaveClass(_classData);
 		}
 		else
 		{

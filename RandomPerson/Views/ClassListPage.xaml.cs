@@ -6,20 +6,20 @@ namespace RandomPerson.Views;
 
 public partial class ClassListPage : ContentPage
 {
-	private string _className;
-	private ObservableCollection<Student> _students;
+	private Class _classData;
+	private ObservableCollection<Student> _students = new();
 
 	public ClassListPage(string className)
 	{
 		InitializeComponent();
-		_className = className;
-		Title = $"Edycja klasy {className}";
+		_classData = FileService.LoadClassData(className);
+		Title = $"Edycja klasy {_classData.Name}";
 		LoadStudents();
 	}
 
 	private void LoadStudents()
 	{
-		_students = new ObservableCollection<Student>(FileService.LoadClass(_className));
+		_students = new ObservableCollection<Student>(_classData.Students);
 		StudentsListView.ItemsSource = _students;
 	}
 
@@ -40,7 +40,8 @@ public partial class ClassListPage : ContentPage
 
 	private void OnSave(object sender, EventArgs e)
 	{
-		FileService.SaveClass(_className, _students.ToList());
+		_classData.Students = _students.ToList();
+		FileService.SaveClass(_classData);
 		DisplayAlert("Sukces", "Zapisano listę uczniów.", "OK");
 	}
 	private void OnBack(object sender, EventArgs e)

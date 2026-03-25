@@ -27,6 +27,11 @@ public static class FileService
         File.WriteAllLines(path, lines);
     }
 
+    public static void SaveClass(Class classData)
+    {
+        SaveClass(classData.Name, classData.Students);
+    }
+
     public static List<Student> LoadClass(string className)
     {
         EnsureDirectory();
@@ -37,6 +42,15 @@ public static class FileService
                    .Where(l => !string.IsNullOrWhiteSpace(l))
                    .Select(ParseStudent)
                    .ToList();
+    }
+
+    public static Class LoadClassData(string className)
+    {
+        return new Class
+        {
+            Name = className,
+            Students = LoadClass(className)
+        };
     }
 
     private static Student ParseStudent(string line)

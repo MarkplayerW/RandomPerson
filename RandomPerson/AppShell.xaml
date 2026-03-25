@@ -4,7 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RandomPerson"
-    Title="RandomPerson">
+    Title="RandomPerson"
+    BackgroundColor="#2c3e50"
+    ForegroundColor="White"
+    TitleColor="White"
+    UnselectedColor="#c8d0da"
+    DisabledColor="#8b97a6">
 
     <Shell.Resources>
         <StyleSheet Source="/Resources/Styles/styles.css" />
