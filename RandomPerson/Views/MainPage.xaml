@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="RandomPerson.MainPage"
+    Title="Losowanie"
+    StyleClass="page">
+    
+    <ScrollView>
+            <VerticalStackLayout StyleClass="container">
+
+                <Label Text="System Losowania" StyleClass="title" />
+
+                <Label Text="Szczęśliwy numerek:" StyleClass="label" />
+                <Label x:Name="LuckyNumberLabel" StyleClass="lucky-number" />
+                <Button Text="Losuj numerek" Clicked="OnDrawLuckyNumber" StyleClass="btn-secondary" />
+
+                <BoxView StyleClass="divider" />
+
+                <Label Text="Wybierz klasę:" StyleClass="label" />
+                <Picker x:Name="ClassPicker" StyleClass="picker" />
+
+                <HorizontalStackLayout StyleClass="btn-row">
+                    <Button Text="Nowa klasa" Clicked="OnNewClass" StyleClass="btn-primary" />
+                    <Button Text="Edytuj listę" Clicked="OnEditClass" StyleClass="btn-secondary" />
+                    <Button Text="Losuj!" Clicked="OnDraw" StyleClass="btn-accent" />
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+</ContentPage>
