@@ -6,8 +6,10 @@ namespace RandomPerson.Services
     {
         public static int LuckyNumber { get; set; } = 0;
 
-        public static Student? DrawStudent(List<Student> students)
+        public static Student? DrawStudent(Class classData)
         {
+            var students = classData.Students;
+
             foreach (var s in students)
             {
                 if (s.DrawnCount > 0) s.DrawnCount--;

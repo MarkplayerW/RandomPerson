@@ -16,7 +16,7 @@ public partial class DrawPage : ContentPage
 
 	private void OnDrawStudent(object sender, EventArgs e)
 	{
-		var drawn = DrawService.DrawStudent(_classData.Students);
+       var drawn = DrawService.DrawStudent(_classData);
 		if (drawn != null)
 		{
 			DrawnStudentLabel.Text = drawn.Name;

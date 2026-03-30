@@ -18,21 +18,25 @@ public static class FileService
                         .ToList()!;
     }
 
-    public static void SaveClass(string className, List<Student> students)
+    public static void SaveClass(Class classData)
     {
         EnsureDirectory();
-        var path = Path.Combine(BasePath, $"{className}.txt");
-        var lines = students.Select(s =>
+        var path = Path.Combine(BasePath, $"{classData.Name}.txt");
+        var lines = classData.Students.Select(s =>
             $"{s.Name};{s.IsPresent};{s.DrawnCount}");
         File.WriteAllLines(path, lines);
     }
 
-    public static void SaveClass(Class classData)
+    public static Class LoadClassData(string className)
     {
-        SaveClass(classData.Name, classData.Students);
+        return new Class
+        {
+            Name = className,
+            Students = LoadStudents(className)
+        };
     }
 
-    public static List<Student> LoadClass(string className)
+    private static List<Student> LoadStudents(string className)
     {
         EnsureDirectory();
         var path = Path.Combine(BasePath, $"{className}.txt");
@@ -42,15 +46,6 @@ public static class FileService
                    .Where(l => !string.IsNullOrWhiteSpace(l))
                    .Select(ParseStudent)
                    .ToList();
-    }
-
-    public static Class LoadClassData(string className)
-    {
-        return new Class
-        {
-            Name = className,
-            Students = LoadClass(className)
-        };
     }
 
     private static Student ParseStudent(string line)
